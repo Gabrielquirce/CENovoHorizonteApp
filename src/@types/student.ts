@@ -1,0 +1,62 @@
+export interface Student {
+  id: number;
+  nome: string;
+  dataNascimento: string;
+  naturalidade: string;
+  nacionalidade: string;
+  sexo: string;
+  cpf: string;
+  rg: string;
+  anoLetivo: string;
+  termo: string;
+  folha: string;
+  livro: string;
+  matricula: string;
+  turno: string;
+  tipoSanguineo: string;
+  raca: string;
+  mae?: {
+    nome: string;
+    dataNascimento?: string;
+    endereco?: string;
+    cep?: string;
+    cpf?: string;
+    rg?: string;
+    profissao?: string;
+    telefone?: string;
+    email?: string;
+    trabalho?: string;
+    telefoneTrabalho?: string;
+  };
+  pai?: {
+    nome: string;
+    dataNascimento?: string;
+    endereco?: string;
+    cep?: string;
+    cpf?: string;
+    rg?: string;
+    profissao?: string;
+    telefone?: string;
+    email?: string;
+    trabalho?: string;
+    telefoneTrabalho?: string;
+  };
+  observacoes?: {
+    descricao?: string;
+    data?: string;
+    matriculaTipo?: string;
+  escola?: string;
+  temIrmaos?: boolean;
+  irmaosNome?: string;
+  temEspecialista?: string;
+  especialista?: string;
+  temAlergias?: string;
+  alergia?: string;
+  temMedicamento?: string;
+  medicamento?: string;
+  reside?: string;
+  respNome?: string;
+  respTelefone?: string;
+  pessoasAutorizadas?: string;
+  };
+}
