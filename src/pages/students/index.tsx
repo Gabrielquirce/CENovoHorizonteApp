@@ -27,7 +27,7 @@ useEffect(() => {
 
 const enrichedData = studentsData.map(student => ({
   ...student,
-  mae: maesData.find(mae => mae.nome === student.mae?.nome) || {
+  mae: maesData.find(mae => mae.nome === mae.nome) || {
     nome: '',
     dataNascimento: '',
     endereco: '',
@@ -40,7 +40,7 @@ const enrichedData = studentsData.map(student => ({
     trabalho: '',
     telefoneTrabalho: '',
   },
-  pai: paisData.find(pai => pai.nome === student.pai?.nome) || {
+  pai: paisData.find(pai => pai.nome === pai.nome) || {
     nome: '',
     dataNascimento: '',
     endereco: '',

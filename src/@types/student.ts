@@ -15,7 +15,9 @@ export interface Student {
   turno: string;
   tipoSanguineo: string;
   raca: string;
-  mae?: {
+}
+
+  export interface Mae {
     nome: string;
     dataNascimento?: string;
     endereco?: string;
@@ -28,7 +30,7 @@ export interface Student {
     trabalho?: string;
     telefoneTrabalho?: string;
   };
-  pai?: {
+  export interface Pai {
     nome: string;
     dataNascimento?: string;
     endereco?: string;
@@ -41,22 +43,25 @@ export interface Student {
     trabalho?: string;
     telefoneTrabalho?: string;
   };
-  observacoes?: {
+
+  export interface Observacao {
+    idObservacoes: number;
     descricao?: string;
     data?: string;
     matriculaTipo?: string;
-  escola?: string;
-  temIrmaos?: boolean;
-  irmaosNome?: string;
-  temEspecialista?: string;
-  especialista?: string;
-  temAlergias?: string;
-  alergia?: string;
-  temMedicamento?: string;
-  medicamento?: string;
-  reside?: string;
-  respNome?: string;
-  respTelefone?: string;
-  pessoasAutorizadas?: string;
+    escola?: string;
+    turma?: string;
+    temIrmaos?: boolean;
+    irmaosNome?: string;
+    temEspecialista?: boolean;
+    especialista?: string;
+    temAlergias?: boolean;
+    alergia?: string;
+    temMedicamento?: boolean;
+    medicamento?: string;
+    reside?: string;
+    endereco?: string;
+    respNome?: string;
+    respTelefone?: string;
+    pessoasAutorizadas?: string;
   };
-}
