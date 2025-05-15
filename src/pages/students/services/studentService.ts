@@ -56,17 +56,3 @@ export const exportStudentPDF = async (studentId: string) => {
     throw new Error('Erro ao exportar PDF: Erro desconhecido');
   }
 };
-
-export const exportStudentCSV = async (studentId: string) => {
-  try {
-    const response = await api.get(`/alunos/${studentId}/csv`, {
-      responseType: 'blob',
-    });
-    return response.data;
-  } catch (error) {
-    if (error instanceof Error) {
-      throw new Error('Erro ao exportar CSV: ' + error.message);
-    }
-    throw new Error('Erro ao exportar CSV: Erro desconhecido');
-  }
-};

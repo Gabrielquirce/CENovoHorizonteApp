@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Alert, KeyboardAvoidingView, ScrollView, View, Text, Platform, Linking } from 'react-native';
+import { ActivityIndicator, Alert, KeyboardAvoidingView, ScrollView, View, Text, Platform, Linking, TouchableOpacity } from 'react-native';
 import { Student } from '../../@types/student';
-import { fetchStudents, exportStudentPDF, exportStudentCSV, fetchMaes, fetchPais, fetchObservacoes } from './services/studentService';
+import { fetchStudents, exportStudentPDF, fetchMaes, fetchPais, fetchObservacoes } from './services/studentService';
 import Header from './components/studentDetailModal/components/studentsHeader';
 import SearchBar from './components/searchBar';
 import StudentCard from './components/studentCard';
 import StudentDetailModal from './components/studentDetailModal';
 import { styles } from './styles';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 export default function StudentsScreen() {
   const [students, setStudents] = useState<Student[]>([]);
@@ -14,6 +16,17 @@ export default function StudentsScreen() {
   const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const navigation = useNavigation<StudentsScreenNavigationProp>();
+
+  type RootStackParamList = {
+    StudentsScreen: undefined;
+    HomePage: undefined;
+    // Add other screens here if needed
+  };
+
+  type StudentsScreenNavigationProp = StackNavigationProp<RootStackParamList, 'StudentsScreen'>;
+  
+
 
 useEffect(() => {
   const loadStudents = async () => {
@@ -27,7 +40,7 @@ useEffect(() => {
 
 const enrichedData = studentsData.map(student => ({
   ...student,
-  mae: maesData.find(mae => mae.nome === mae.nome) || {
+  mae: maesData.find(mae => mae.idMae === student.id) || {
     nome: '',
     dataNascimento: '',
     endereco: '',
@@ -40,7 +53,7 @@ const enrichedData = studentsData.map(student => ({
     trabalho: '',
     telefoneTrabalho: '',
   },
-  pai: paisData.find(pai => pai.nome === pai.nome) || {
+  pai: paisData.find(pai => pai.idPai === student.id) || {
     nome: '',
     dataNascimento: '',
     endereco: '',
@@ -102,16 +115,6 @@ setStudents(enrichedData as Student[]);
     }
   };
 
-  const handleExportCSV = async (student: Student) => {
-    try {
-      const csvBlob = await exportStudentCSV(String(student.id));
-      const csvUrl = URL.createObjectURL(csvBlob as Blob);
-      Linking.openURL(csvUrl);
-    } catch (err) {
-      Alert.alert('Erro', err instanceof Error ? err.message : 'An unknown error occurred');
-    }
-  };
-
 const filteredStudents = students.filter(student =>
   student && // Ensure student is not undefined or null
   [student.nome?.toLowerCase() || '', student.cpf?.toLowerCase() || '', student.matricula?.toLowerCase() || ''].some(field =>
@@ -140,6 +143,7 @@ const filteredStudents = students.filter(student =>
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}
     >
+    <View style={styles.flexContainer}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <Header />
         <SearchBar value={searchQuery} onChangeText={setSearchQuery} />
@@ -148,18 +152,30 @@ const filteredStudents = students.filter(student =>
   <StudentCard
     key={student.id}
     student={student}
+    mae={student.mae}
     onPress={() => setSelectedStudent(student)}
   />
 ))}
 
         <StudentDetailModal
-          visible={!!selectedStudent}
-          student={selectedStudent}
-          onClose={() => setSelectedStudent(null)}
-          onExportPDF={handleExportPDF}
-          onExportCSV={handleExportCSV}
-        />
+            visible={!!selectedStudent}
+            student={selectedStudent}
+            mae={selectedStudent?.mae || null}
+            pai={selectedStudent?.pai || null}
+            obs={selectedStudent?.observacoes || null}
+            onClose={() => setSelectedStudent(null)}
+            onExportPDF={handleExportPDF} />
+      
       </ScrollView>
+        <TouchableOpacity
+            style={styles.closeButton}
+            onPress={() => {
+              navigation.navigate('HomePage');
+            }}
+            >
+            <Text style={styles.closeButtonText}>Voltar à Página Principal</Text>
+        </TouchableOpacity>
+      </View>
     </KeyboardAvoidingView>
   );
 }

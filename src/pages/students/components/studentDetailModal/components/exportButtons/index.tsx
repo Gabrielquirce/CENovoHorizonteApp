@@ -7,10 +7,9 @@ interface ExportButtonsProps {
   student: Student; // Use the actual Student interface
   onClose: () => void;
   onExportPDF: (student: Student) => void;
-  onExportCSV: (student: Student) => void;
 }
 
-export default function ExportButtons({ student, onClose, onExportPDF, onExportCSV }: ExportButtonsProps) {
+export default function ExportButtons({ student, onClose, onExportPDF }: ExportButtonsProps) {
   return (
     <View style={styles.exportButtonsContainer}>
       <View style={styles.exportRow}>
@@ -20,15 +19,7 @@ export default function ExportButtons({ student, onClose, onExportPDF, onExportC
         >
           <Text style={styles.exportButtonText}>Exportar PDF</Text>
         </TouchableOpacity>
-
-        <TouchableOpacity
-          style={[styles.exportButton, styles.csvButton]}
-          onPress={() => onExportCSV(student)}
-        >
-          <Text style={styles.exportButtonText}>Exportar CSV</Text>
-        </TouchableOpacity>
       </View>
-
       <TouchableOpacity style={styles.closeButton} onPress={onClose}>
         <Text style={styles.closeButtonText}>Fechar</Text>
       </TouchableOpacity>

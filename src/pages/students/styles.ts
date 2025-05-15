@@ -20,7 +20,12 @@ export const styles = StyleSheet.create({
     padding: 16,
     marginTop: 20,
   },
+  flexContainer: {
+    flex: 1,
+    justifyContent: 'space-between', // Push content to the top and button to the bottom
+  },
   scrollContainer: {
+    flexGrow: 1,
     paddingBottom: 32,
   },
   searchInput: {
@@ -131,24 +136,19 @@ export const styles = StyleSheet.create({
     backgroundColor: '#8B0000',
   },
   
-  csvButton: {
-    backgroundColor: '#006400',
-  },
-  
   exportButtonText: {
     color: 'white',
     fontSize: 16,
     fontWeight: '500',
   },
-  
   closeButton: {
     backgroundColor: '#902121',
     borderRadius: 8,
     padding: 15,
     alignItems: 'center',
     marginTop: 20,
+    marginBottom: 40,
   },
-
   closeButtonText: {
     color: 'white',
     fontSize: 16,

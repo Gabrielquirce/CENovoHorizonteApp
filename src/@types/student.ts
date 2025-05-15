@@ -1,4 +1,7 @@
 export interface Student {
+  pai: any;
+  mae: any;
+  observacoes: any;
   id: number;
   nome: string;
   dataNascimento: string;
@@ -18,30 +21,32 @@ export interface Student {
 }
 
   export interface Mae {
-    nome: string;
-    dataNascimento?: string;
-    endereco?: string;
-    cep?: string;
-    cpf?: string;
-    rg?: string;
-    profissao?: string;
-    telefone?: string;
-    email?: string;
-    trabalho?: string;
-    telefoneTrabalho?: string;
+    idMae: number;
+    nomeMae: string;
+    dataNascimentoMae?: string;
+    enderecoMae?: string;
+    cepMae?: string;
+    cpfMae?: string;
+    rgMae?: string;
+    profissaoMae?: string;
+    telefoneMae?: string;
+    emailMae?: string;
+    trabalhoMae?: string;
+    telefoneTrabalhoMae?: string;
   };
   export interface Pai {
-    nome: string;
-    dataNascimento?: string;
-    endereco?: string;
-    cep?: string;
-    cpf?: string;
-    rg?: string;
-    profissao?: string;
-    telefone?: string;
-    email?: string;
-    trabalho?: string;
-    telefoneTrabalho?: string;
+    idPai: number;
+    nomePai: string;
+    dataNascimentoPai?: string;
+    enderecoPai?: string;
+    cepPai?: string;
+    cpfPai?: string;
+    rgPai?: string;
+    profissaoPai?: string;
+    telefonePai?: string;
+    emailPai?: string;
+    trabalhoPai?: string;
+    telefoneTrabalhoPai?: string;
   };
 
   export interface Observacao {

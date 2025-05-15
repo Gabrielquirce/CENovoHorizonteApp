@@ -3,16 +3,19 @@ import { TouchableOpacity, View, Text } from 'react-native';
 import { styles } from '../../styles';
 
 interface Student {
+  mae: any;
   nome: string;
   matricula: string;
   cpf: string;
-  mae?: {
-    nome: string;
-  };
+}
+
+interface Mae {
+  nomeMae: string;
 }
 
 interface StudentCardProps {
   student: Student;
+  mae: Mae | null;
   onPress: () => void;
 }
 
@@ -26,7 +29,7 @@ export default function StudentCard({ student, onPress }: StudentCardProps) {
       <View style={styles.cardDetails}>
         <Text style={styles.detailText}>CPF: {student.cpf || 'Não informado'}</Text>
         <Text style={styles.detailText}>
-          Responsável: {student.mae?.nome || 'Não informado'}
+          Responsável: {student.mae?.nomeMae || 'Não informado'}
         </Text>
       </View>
     </TouchableOpacity>
